@@ -66,6 +66,8 @@ class FocusLockApp:
 
         self.current_session: Optional[FocusSession] = None
         self._session_start_ts: Optional[float] = None
+        self._long_session_warned: bool = False
+        self._long_session_snooze_until: float = 0
         self.all_events: List[NotionEvent] = []
 
         self._refresh_schedule()
@@ -118,7 +120,28 @@ class FocusLockApp:
             else:
                 self._write_state()
             self._write_analytics()
+            self._maybe_warn_long_session()
             time.sleep(30)
+
+    def _maybe_warn_long_session(self):
+        if not self.current_session or not self._session_start_ts:
+            return
+        if self._long_session_warned:
+            return
+        if time.time() < self._long_session_snooze_until:
+            return
+        if time.time() - self._session_start_ts >= 5 * 3600:
+            self._long_session_warned = True
+            threading.Thread(target=self._run_long_session_dialog, daemon=True).start()
+
+    def _run_long_session_dialog(self):
+        session_name = self.current_session.display_name if self.current_session else "Focus Session"
+        action = dialogs.ask_long_session(session_name, timeout=300)
+        if action == "continue":
+            self._long_session_warned = False
+            self._long_session_snooze_until = time.time() + 3600
+        else:
+            self._end_session(None)
 
     def _refresh_schedule(self):
         events: List[NotionEvent] = []
@@ -268,6 +291,8 @@ class FocusLockApp:
     def _start_session(self, session: FocusSession):
         self.current_session = session
         self._session_start_ts = time.time()
+        self._long_session_warned = False
+        self._long_session_snooze_until = 0
         try:
             log_event("session_start",
                       session_name=session.display_name,

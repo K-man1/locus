@@ -16,6 +16,7 @@ struct PromptView: View {
             case "ask_off_topic":  askOffTopicBody
             case "ask_override":   askOverrideBody
             case "show_result":    showResultBody
+            case "long_session":   longSessionBody
             default:               unknownBody
             }
         }
@@ -196,6 +197,39 @@ struct PromptView: View {
 
             footer {
                 Button("OK") { respond(action: "ok") }
+                    .buttonStyle(PromptPrimaryButtonStyle())
+                    .keyboardShortcut(.defaultAction)
+            }
+        }
+    }
+
+    // MARK: - long_session
+
+    private var longSessionBody: some View {
+        VStack(spacing: 0) {
+            promptHeader(
+                icon: "clock.badge.exclamationmark",
+                tint: .orange,
+                title: "Still focusing?",
+                subtitle: prompt.session_name ?? "Focus Session"
+            )
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Your session has been running for over 5 hours.")
+                    .font(.system(size: 13))
+                    .foregroundStyle(.primary)
+                Text("If you don't respond, the session will end automatically.")
+                    .font(.system(size: 12))
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.horizontal, 22)
+            .padding(.top, 4)
+            .padding(.bottom, 18)
+
+            footer {
+                Button("End Session") { respond(action: "end") }
+                    .buttonStyle(SecondaryPromptButtonStyle())
+                Button("Keep Going") { respond(action: "continue") }
                     .buttonStyle(PromptPrimaryButtonStyle())
                     .keyboardShortcut(.defaultAction)
             }
