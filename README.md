@@ -1,43 +1,18 @@
 # Locus
-A macOS focus app that blocks distracting apps and websites during study
-sessions.
+Locus is a MacOS app that keeps you focused on whatever you are working on. You start by typing what you are working on, like "Math HW" or selecting something from a calender you connected. Then you visit a website/app. If the AI thinks that you are on task (like visiting math.com or something idk while in Math HW session), nothing happens. However if you visit something like fungames.com when in your focus session, it asks you why you need to visit the website. You can explain why, and if the AI finds it plausible, you're good! Otherwise, it'll block it and prevent you from visit the website.
 
-Website: **https://getlocusapp.netlify.app**
+I made it because I was using other blockers, and I thought that this was a really good idea with a pretty simple implementation!
+
+One thing: its not meant to be perfect. The idea is to make you think twice before visit that website and by forcing you to write out your reason it makes you wonder yourself "why am i trying to watch youtube?" and it also makes you pause and relax for a second.
 
 ## Install
 
-1. Download the latest **Locus.dmg** from the
-   [Releases page](../../releases/latest).
-2. Open the DMG and drag **Locus** into your **Applications** folder.
-3. First launch: right-click **Locus** → **Open** → **Open** (the app
-   isn't notarized yet, so macOS warns once).
+1. Download "Locus.dmg" from the [releases page]([../../releases/latest](https://github.com/K-man1/locus/releases/tag/v1.0.1)).
+2. Open the dmg and drag it into your Applications folder.
+3. Since I dont have the apple developer thing you will need to approve it in settings before opening it for the first time.
 
-## 
-
-## Features
-- **AI Unblocks**
-Unblock websites & apps by explaining why you need them and how they pertain to your task. AI then decides if your reason is valid.
-- **Smart Blocking**
-Blocks all websites & apps other than the ones on your allow-list and obviously related sites. For example, the AI will not block a google search for "mitosis" during a Science HW session, however it will block the Minecraft app.
-- **Calendar & NotionIntegration**
-Use the public iCal link to your calendar (Google Calendar, Outlook, Schoology, Canvas, etc) to simply select what task you are working on. Also, if you use Notion as a student planner, use OAuth to connect Locus to it to automatically extract tasks.
-- **Drift Detection**
-Stay on task on certain websites as the AI re-checks websites. For example, if youtube.com was unblocked because I need to watch a science lecture, but I start watching "Jet Lag: The Game," the AI recognize this and reblock the website.
-- **Customization**
-The extension is highly customizable. It is also open-source for developer.
-- **Analytics**
-Understand your behaviors and tendencies with a detailed analytics tab.
-
-## How It Was Made
-- **SwiftUI**: Used for building the macOS app's GUI.
-- **Python**: Backend for the app, powers all functionality.
-- **Cloudflare Workers**: Handles lightweight serverless tasks, such as managing website blocking rules.
-
-## Photo Gallery
-- **Main Dashboard**: ![Main Dashboard](dashboard.png)
-- **Analytics View**: ![Analytics View](analytics.png)
-- **Dark Mode**: ![Dark Mode](darkmode.png)
-- **Blocking View**: ![Blocking Settings](blocked.png)
-
-## License
-MIT: See [LICENSE](LICENSE).
+## Screeshots
+- Main Dashboard: ![Main Dashboard](dashboard.png)
+- Analytics View: ![Analytics View](analytics.png)
+- Dark Mode: ![Dark Mode](darkmode.png)
+- Blocking View: ![Blocking Settings](blocked.png)
