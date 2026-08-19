@@ -7,8 +7,6 @@ One thing: its not meant to be perfect. The idea is to make you think twice befo
 
 ## Install
 ```
-xcode-select --install
-
 git clone https://github.com/K-man1/locus.git
 cd locus
 
