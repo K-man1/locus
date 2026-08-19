@@ -6,10 +6,21 @@ I made it because I was using other blockers, and I thought that this was a real
 One thing: its not meant to be perfect. The idea is to make you think twice before visit that website and by forcing you to write out your reason it makes you wonder yourself "why am i trying to watch youtube?" and it also makes you pause and relax for a second.
 
 ## Install
+```
+xcode-select --install
 
-1. Download "Locus.dmg" from the [releases page]([../../releases/latest](https://github.com/K-man1/locus/releases/tag/v1.0.1)).
-2. Open the dmg and drag it into your Applications folder.
-3. Since I dont have the apple developer thing you will need to approve it in settings before opening it for the first time.
+git clone https://github.com/K-man1/locus.git
+cd locus
+
+./build_daemon.sh
+(cd FocusLockApp && ./build.sh)
+codesign --force --deep --sign - FocusLockApp/build/Locus.app
+cp -R FocusLockApp/build/Locus.app /Applications/
+open /Applications/Locus.app
+```
+- macOS 13 (Ventura) or later
+- Python 3.10+
+- Swift compiler
 
 ## Screeshots
 - Main Dashboard: ![Main Dashboard](dashboard.png)
